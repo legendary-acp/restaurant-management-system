@@ -104,7 +104,8 @@ func UpdateMenu() gin.HandlerFunc {
 
 		var updateObj primitive.D
 
-		if menu.Start_Date != nil && menu.End_Date != nil {
+		//FIXME: Might not work
+		if menu.Start_Date.IsZero() && menu.End_Date.IsZero() {
 			if !inTimeSpan(*&menu.Start_Date, *&menu.End_Date, time.Now()) {
 				msg := "Kindly retype the time"
 				c.JSON(http.StatusBadRequest, gin.H{"error": msg})
